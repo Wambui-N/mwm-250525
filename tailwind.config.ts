@@ -59,7 +59,10 @@ const config: Config = {
   		fontFamily: {
   			satoshi: [
   				'var(--font-satoshi)'
-  			]
+  			],
+			brule:[
+				'var(--font-brule)'
+			]
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

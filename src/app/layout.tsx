@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "./components/footer";
 import Nav from "./components/nav";
-import { satoshi } from "./fonts/fonts";
+import { satoshi, brule } from "./fonts/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${satoshi.variable} font-satoshi antialiased`}
+        className={`${satoshi.variable} ${brule.variable} font-satoshi antialiased`}
       >
         <Nav />
         {children}

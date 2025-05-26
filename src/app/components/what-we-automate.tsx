@@ -12,7 +12,7 @@ const WhatWeAutomate = () => {
       title: "Web Scraping for Leads",
       description:
         "Wake up to fresh, qualified leads—automatically gathered overnight.",
-      href: "/web-scraping",
+      href: "/services/web-scraping",
       isPopular: false,
     },
     {
@@ -20,7 +20,7 @@ const WhatWeAutomate = () => {
       title: "Proposal Generation",
       description:
         "Generate polished proposals instantly with your templates and pricing.",
-      href: "/proposal-generation",
+      href: "/services/proposal-generation",
       isPopular: true,
     },
     {
@@ -28,7 +28,7 @@ const WhatWeAutomate = () => {
       title: "Follow-Up Sequences",
       description:
         "Automated emails keep your leads warm and engaged, hands-free.",
-      href: "/follow-up-sequences",
+      href: "/services/follow-up-sequences",
       isPopular: false,
     },
   ];
@@ -56,8 +56,10 @@ const WhatWeAutomate = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`min-w-[280px] max-w-xs flex-shrink-0 py-8 md:max-w-sm rounded-lg p-6 relative ${
-                automation.isPopular ? 'bg-black' : 'bg-none text-maroon'
+              className={`relative min-w-[280px] max-w-xs flex-shrink-0 rounded-lg p-6 py-8 md:max-w-sm ${
+                automation.isPopular
+                  ? "bg-black bg-gradient-to-b from-black via-black to-maroon/50"
+                  : "bg-none text-maroon"
               }`}
             >
               {/* {automation.isPopular && (
@@ -66,24 +68,32 @@ const WhatWeAutomate = () => {
                 </div>
               )} */}
               <div className="mb-10 w-fit rounded-full">
-                <automation.icon className={`h-10 w-10 stroke-[1.2] ${
-                  automation.isPopular ? 'text-white' : 'text-black'
-                }`} />
+                <automation.icon
+                  className={`h-10 w-10 stroke-[1.2] ${
+                    automation.isPopular ? "text-white" : "text-black"
+                  }`}
+                />
               </div>
-              <h3 className={`mb-2 text-lg font-semibold ${
-                automation.isPopular ? 'text-white' : 'text-black'
-              }`}>
+              <h3
+                className={`mb-2 text-lg font-semibold ${
+                  automation.isPopular ? "text-white" : "text-black"
+                }`}
+              >
                 {automation.title}
               </h3>
-              <p className={`mb-4 text-base leading-6 ${
-                automation.isPopular ? 'text-white/70' : 'text-black/70'
-              }`}>
+              <p
+                className={`mb-4 text-base leading-6 ${
+                  automation.isPopular ? "text-white/70" : "text-black/70"
+                }`}
+              >
                 {automation.description}
               </p>
               <Link
                 href={automation.href}
-                className={`group inline-flex items-center text-base font-medium leading-6  ${
-                  automation.isPopular ? 'text-white hover:text-white/80' : 'text-black hover:text-black/80'
+                className={`group inline-flex items-center text-base font-medium leading-6 ${
+                  automation.isPopular
+                    ? "text-white hover:text-white/80"
+                    : "text-black hover:text-black/80"
                 }`}
               >
                 Learn more

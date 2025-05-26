@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -65,12 +65,12 @@ const Testimonials = () => {
     <section className="padding py-16">
       <div className="flex min-h-[400px] flex-col overflow-hidden rounded-2xl bg-white shadow-lg md:flex-row">
         {/* Left: Heading */}
-        <div className="flex flex-1 flex-col items-center justify-center rounded-t-2xl bg-black p-10 md:rounded-l-2xl md:rounded-br-none md:rounded-tr-none">
-          <div className="relative w-full">
-            <span className="absolute left-0 top-0 -translate-y-4 text-5xl text-white/30">
-              "
-            </span>
-            <h2 className="relative z-10 mb-4 mt-8 text-3xl font-bold leading-tight text-white md:text-4xl">
+        <div className="relative flex flex-1 flex-col items-start justify-center rounded-t-2xl bg-black bg-gradient-to-b from-black via-black to-maroon/50 p-10 md:rounded-l-2xl md:rounded-br-none md:rounded-tr-none">
+          <div className=" w-full">
+            {/* <span className="absolute left-12 top-24 text-white/20">
+              <Quote className="w-28 h-28 stroke-[0.75]" />
+            </span> */}
+            <h2 className="relative z-10 text-3xl font-bold leading-tight text-white md:text-4xl">
               What Our Customers
               <br />
               Are Saying
