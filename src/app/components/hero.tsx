@@ -12,25 +12,25 @@ const Hero = () => {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.75;
-      
+
       // Handle video loading
       const handleVideoLoad = () => {
         setIsVideoLoaded(true);
       };
 
-      videoRef.current.addEventListener('loadeddata', handleVideoLoad);
-      
+      videoRef.current.addEventListener("loadeddata", handleVideoLoad);
+
       // Cleanup
       return () => {
         if (videoRef.current) {
-          videoRef.current.removeEventListener('loadeddata', handleVideoLoad);
+          videoRef.current.removeEventListener("loadeddata", handleVideoLoad);
         }
       };
     }
   }, []);
 
   return (
-    <section 
+    <section
       className="padding relative overflow-hidden rounded-xl py-12 sm:py-16 md:py-20 lg:py-24"
       aria-label="Hero section"
     >
@@ -50,15 +50,15 @@ const Hero = () => {
           <source src="/hero.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div 
-          className={`absolute inset-0 bg-black/50 backdrop-blur-[2px] transition-opacity duration-300 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`} 
+        <div
+          className={`absolute inset-0 bg-black/50 backdrop-blur-[2px] transition-opacity duration-300 ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
           aria-hidden="true"
         />
       </div>
 
       <div className="relative z-10">
         <div className="mx-auto max-w-6xl">
-          <div className="grid items-center gap-8 lg:gap-16 lg:grid-cols-2">
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
             {/* Left Column - Main Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -66,9 +66,9 @@ const Hero = () => {
               transition={{ duration: 0.5 }}
               className="space-y-4 sm:space-y-6"
             >
-              <h1 className="text-balance pb-2 sm:pb-4 text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-white">
+              <h1 className="text-balance pb-2 text-4xl font-semibold leading-tight tracking-tight text-white sm:pb-4 md:text-5xl lg:text-6xl">
                 <span className="block">Stop wasting time on</span>
-                <span className="text-white underline underline-offset-8 decoration-2">
+                <span className="text-white underline decoration-2 underline-offset-8">
                   repetitive tasks
                 </span>
               </h1>
@@ -77,7 +77,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-sm sm:text-base text-white/90 max-w-2xl leading-relaxed md:leading-normal"
+                className="max-w-2xl text-sm leading-relaxed text-white/90 sm:text-base md:leading-normal"
               >
                 Most B2B teams waste{" "}
                 <span className="font-bold text-white">40+ hours monthly</span>{" "}
@@ -96,7 +96,7 @@ const Hero = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   size="lg"
-                  className="flex flex-row items-center justify-center rounded-lg bg-fog text-black hover:bg-fog/90 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors"
+                  className="flex flex-row items-center justify-center rounded-lg bg-fog text-black transition-colors hover:bg-fog/90 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
                   aria-label="Book a free consultation to save 40+ hours"
                 >
                   Save 40+ hours — Book a free consultation
@@ -112,35 +112,42 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="space-y-6 sm:space-y-6"
             >
-              <div className="rounded-xl bg-gradient-to-r from-white/10 to-white/5 p-4 sm:p-6 backdrop-blur-md">
+              <div className="rounded-xl bg-gradient-to-r from-white/10 to-white/5 p-4 backdrop-blur-md sm:p-6">
                 <div className="flex items-start space-x-3 sm:space-x-4">
-                  <div className="rounded-full bg-white/90 p-2" aria-hidden="true">
-                    <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-maroon" />
+                  <div
+                    className="rounded-full bg-white/90 p-2"
+                    aria-hidden="true"
+                  >
+                    <Clock className="h-5 w-5 text-maroon sm:h-6 sm:w-6" />
                   </div>
                   <div>
-                    <h3 className="mb-1 sm:mb-2 text-base sm:text-lg font-semibold text-white">
+                    <h3 className="mb-1 text-base font-semibold text-white sm:mb-2 sm:text-lg">
                       Seamless Integration
                     </h3>
-                    <p className="text-sm sm:text-base text-white/80">
-                      We build invisible automation that plugs into your
-                      existing tools. No learning curves, no new systems.
+                    <p className="text-sm text-white/80 sm:text-base">
+                      We build invisible AI-powered business automations that
+                      plugs into your existing tools. No learning curves, no new
+                      systems.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-xl bg-gradient-to-r from-white/10 to-white/5 p-4 sm:p-6 backdrop-blur-md">
+              <div className="rounded-xl bg-gradient-to-r from-white/10 to-white/5 p-4 backdrop-blur-md sm:p-6">
                 <div className="flex items-start space-x-3 sm:space-x-4">
-                  <div className="rounded-full bg-white/90 p-2" aria-hidden="true">
-                    <BarChart className="h-5 w-5 sm:h-6 sm:w-6 text-maroon" />
+                  <div
+                    className="rounded-full bg-white/90 p-2"
+                    aria-hidden="true"
+                  >
+                    <BarChart className="h-5 w-5 text-maroon sm:h-6 sm:w-6" />
                   </div>
                   <div>
-                    <h3 className="mb-1 sm:mb-2 text-base sm:text-lg font-semibold text-white">
+                    <h3 className="mb-1 text-base font-semibold text-white sm:mb-2 sm:text-lg">
                       Smart Workflows
                     </h3>
-                    <p className="text-sm sm:text-base text-white/80">
-                      Smart workflows that turn your busywork into background
-                      processes. Stop chasing deals. Start closing them.
+                    <p className="text-sm text-white/80 sm:text-base">
+                      Custom workflow automation solutions that turn your
+                      busywork into background processes.
                     </p>
                   </div>
                 </div>

@@ -76,12 +76,12 @@ const FollowUpSequences = () => {
                 transition={{ duration: 0.5 }}
                 className="max-w-2xl space-y-4"
               >
-                <h1 className="text-balance pb-4 text-xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl">
+                <h1 className="text-balance capitalize pb-4 text-xl font-semibold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl">
                   <span className="block">
-                    Client Communication That Never
+                    Automated customer support systems that never
                   </span>
                   <span className="text-white underline underline-offset-8">
-                    Drops the Ball
+                    drop the ball
                   </span>
                 </h1>
 
