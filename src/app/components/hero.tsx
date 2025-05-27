@@ -47,7 +47,7 @@ const Hero = () => {
               transition={{ duration: 0.5 }}
               className="space-y-4 sm:space-y-6"
             >
-              <h1 className="text-balance pb-2 sm:pb-4 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-white">
+              <h1 className="text-balance pb-2 sm:pb-4 text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-white">
                 <span className="block">Stop wasting time on</span>
                 <span className="text-white underline underline-offset-8 decoration-2">
                   repetitive tasks
