@@ -11,7 +11,7 @@ import {
   Check,
 } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonLink } from "@/components/ui/button";
 import { motion } from "motion/react";
 
 const ProposalGeneration = () => {
@@ -270,12 +270,15 @@ const ProposalGeneration = () => {
             </p>
             
           </div>
-            <Button
+            <ButtonLink
+              href="https://cal.com/madewithmake/meeting?service=Proposal%20Generation"
+              target="_blank"
+              rel="noopener noreferrer"
               size="lg"
               className="flex flex-row items-center rounded-lg bg-black text-fog"
             >
               Schedule Your Call
-            </Button>
+            </ButtonLink>
         </div>
       </section>
     </main>

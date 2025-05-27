@@ -16,7 +16,7 @@ import {
   Star,
 } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonLink } from "@/components/ui/button";
 import { motion } from "motion/react";
 
 const FollowUpSequences = () => {
@@ -263,12 +263,15 @@ const FollowUpSequences = () => {
               We handle the technical setup and email writing. You get the results.
             </p>
           </div>
-          <Button
+          <ButtonLink
+            href="https://cal.com/madewithmake/meeting?service=Follow-up%20Sequences"
+            target="_blank"
+            rel="noopener noreferrer"
             size="lg"
             className="flex flex-row items-center rounded-lg bg-black text-fog"
           >
             Schedule Your Call
-          </Button>
+          </ButtonLink>
         </div>
       </section>
     </main>

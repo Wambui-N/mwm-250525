@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { ArrowRight, Clock, Zap, BarChart } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonLink } from "@/components/ui/button";
 import { motion } from "motion/react";
 
 const Hero = () => {
@@ -68,13 +68,16 @@ const Hero = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
               >
-                <Button
+                <ButtonLink
+                  href="https://cal.com/madewithmake/meeting"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   size="lg"
                   className="flex flex-row items-center rounded-lg bg-fog text-black"
                 >
                   Save 40+ hours — Book a free consultation
                   {/* <ArrowRight className="ml-2 h-4 w-4" /> */}
-                </Button>
+                </ButtonLink>
                 {/* <Button
                   size="lg"
                   className="flex flex-row items-center bg-maroon text-white hover:bg-maroon/80"

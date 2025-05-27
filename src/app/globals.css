@@ -27,6 +27,9 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Footer reveal effect */

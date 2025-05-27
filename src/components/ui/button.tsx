@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 
@@ -34,10 +35,16 @@ const buttonVariants = cva(
   }
 )
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+interface ButtonBaseProps extends VariantProps<typeof buttonVariants> {
+  className?: string
+}
+
+interface ButtonProps extends ButtonBaseProps, React.ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean
+}
+
+interface ButtonLinkProps extends ButtonBaseProps, React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  href: string
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -49,24 +56,56 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {/* Text Glitch */}
-        <div className="relative inline-block overflow-hidden px-2">
-          <span className="invisible whitespace-nowrap">{children}</span>
-          <span className="absolute left-0 top-0 w-[calc(100%-1px)] font-semibold transition-transform duration-500 ease-in-out hover:duration-300 group-hover:-translate-y-full whitespace-nowrap">
-            {children}
-          </span>
-          <span className="absolute left-0 top-0 w-[calc(100%-1px)] translate-y-full font-semibold transition-transform duration-500 ease-in-out hover:duration-300 group-hover:translate-y-0 whitespace-nowrap">
-            {children}
-          </span>
-        </div>
-        {/* Brightness Effect */}
-        {/* <div className="absolute inset-0 flex h-full w-full animate-brightness justify-center">
-          <div className="relative h-full w-8 bg-white/40 blur" />
-        </div> */}
+        {React.Children.map(children, (child) => {
+          if (React.isValidElement(child) && child.type === 'span') {
+            return (
+              <div className="relative inline-block overflow-hidden px-2">
+                <span className="invisible whitespace-nowrap">{child.props.children}</span>
+                <span className="absolute left-0 top-0 w-[calc(100%-1px)] font-semibold transition-transform duration-500 ease-in-out hover:duration-300 group-hover:-translate-y-full whitespace-nowrap">
+                  {child.props.children}
+                </span>
+                <span className="absolute left-0 top-0 w-[calc(100%-1px)] translate-y-full font-semibold transition-transform duration-500 ease-in-out hover:duration-300 group-hover:translate-y-0 whitespace-nowrap">
+                  {child.props.children}
+                </span>
+              </div>
+            );
+          }
+          return child;
+        })}
       </Comp>
     )
   }
 )
 Button.displayName = "Button"
 
-export { Button, buttonVariants }
+const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
+  ({ className, variant, size, children, ...props }, ref) => {
+    return (
+      <Link
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      >
+        {React.Children.map(children, (child) => {
+          if (React.isValidElement(child) && child.type === 'span') {
+            return (
+              <div className="relative inline-block overflow-hidden px-2">
+                <span className="invisible whitespace-nowrap">{child.props.children}</span>
+                <span className="absolute left-0 top-0 w-[calc(100%-1px)] font-semibold transition-transform duration-500 ease-in-out hover:duration-300 group-hover:-translate-y-full whitespace-nowrap">
+                  {child.props.children}
+                </span>
+                <span className="absolute left-0 top-0 w-[calc(100%-1px)] translate-y-full font-semibold transition-transform duration-500 ease-in-out hover:duration-300 group-hover:translate-y-0 whitespace-nowrap">
+                  {child.props.children}
+                </span>
+              </div>
+            );
+          }
+          return child;
+        })}
+      </Link>
+    )
+  }
+)
+ButtonLink.displayName = "ButtonLink"
+
+export { Button, ButtonLink, buttonVariants }

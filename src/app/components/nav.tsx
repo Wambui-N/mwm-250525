@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, ButtonLink } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 
 interface NavLinkProps {
   href: string;
@@ -50,7 +50,10 @@ const Nav = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
+      if (
+        servicesRef.current &&
+        !servicesRef.current.contains(event.target as Node)
+      ) {
         setIsServicesOpen(false);
       }
     };
@@ -66,15 +69,30 @@ const Nav = () => {
       href={href}
       className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
     >
-      <span className="text-black">{children}</span>
+      <span className="text-base  text-black">{children}</span>
     </Link>
   );
 
   const services = [
     { name: "Proposal Generation", href: "/services/proposal-generation" },
     { name: "Follow-up Sequences", href: "/services/follow-up-sequences" },
-    { name: "Web Scraping", href: "/services/web-scraping" },
+    { name: "Lead Generation", href: "/services/lead-generation" },
   ];
+
+  const navigation = {
+    main: [
+      { name: "Home", href: "/" },
+      { name: "Services", href: "/services" },
+      { name: "Blog", href: "/blog" },
+    ],
+  };
+
+  const scrollToFooter = () => {
+    const footer = document.getElementById('footer');
+    if (footer) {
+      footer.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav
@@ -104,33 +122,57 @@ const Nav = () => {
             <div className="hidden items-center space-x-6 md:flex">
               <div className="relative" ref={servicesRef}>
                 <button
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className="flex items-center gap-1 text-black hover:text-black/80"
+                  className="flex items-center gap-1 text-base text-black"
+                  onMouseEnter={() => setIsServicesOpen(true)}
+                  onMouseLeave={() => setIsServicesOpen(false)}
                 >
                   Services
-                  <ChevronDown className={`h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown className="h-4 w-4" />
                 </button>
                 {isServicesOpen && (
-                  <div className="absolute left-0 top-full mt-2 w-48 rounded-lg border border-black/10 bg-white py-2 shadow-lg">
-                    {services.map((service) => (
-                      <Link
-                        key={service.href}
-                        href={service.href}
-                        className="block px-4 py-2 text-sm text-black hover:bg-black/5"
-                        onClick={() => setIsServicesOpen(false)}
-                      >
-                        {service.name}
-                      </Link>
-                    ))}
-                  </div>
+                  <>
+                    {/* Invisible bridge to maintain hover state */}
+                    <div
+                      className="absolute left-0 top-full h-2 w-full"
+                      onMouseEnter={() => setIsServicesOpen(true)}
+                      onMouseLeave={() => setIsServicesOpen(false)}
+                    />
+                    <div
+                      className="absolute left-0 top-[calc(100%+0.5rem)] w-48 rounded-lg border border-black/10 bg-white py-2 shadow-lg"
+                      onMouseEnter={() => setIsServicesOpen(true)}
+                      onMouseLeave={() => setIsServicesOpen(false)}
+                    >
+                      {services.map((service) => (
+                        <Link
+                          key={service.href}
+                          href={service.href}
+                          className="block px-4 py-2 text-base text-black hover:bg-black/5"
+                        >
+                          {service.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </>
                 )}
               </div>
-              <NavLink href="/">Projects</NavLink>
-              <NavLink href="/">About</NavLink>
-              <NavLink href="/">Contact</NavLink>
-              <Button className="h-8 bg-black px-4 text-sm text-white hover:bg-black/90">
-                Get in touch
-              </Button>
+              <NavLink href="/blog">Blog</NavLink>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={scrollToFooter}
+                  className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+                >
+                  <span className="text-base text-black">Contact</span>
+                </button>
+                <ButtonLink
+                  href="https://cal.com/madewithmake/meeting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-8 bg-black ml-3 px-4 text-sm text-white hover:bg-black/90"
+                >
+                  <span>Book a Call</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </ButtonLink>
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -167,7 +209,9 @@ const Nav = () => {
                     className="flex items-center justify-between text-black"
                   >
                     Services
-                    <ChevronDown className={`h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`}
+                    />
                   </button>
                   {isServicesOpen && (
                     <div className="ml-4 flex flex-col space-y-2">
@@ -187,12 +231,28 @@ const Nav = () => {
                     </div>
                   )}
                 </div>
-                <NavLink href="/">Projects</NavLink>
-                <NavLink href="/">About</NavLink>
-                <NavLink href="/">Contact</NavLink>
-                <Button className="h-8 w-full bg-black text-sm text-white hover:bg-black/90">
-                  Get in touch
-                </Button>
+                <NavLink href="/blog">Blog</NavLink>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      scrollToFooter();
+                      setIsMenuOpen(false);
+                    }}
+                    className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+                  >
+                    <span className="text-base text-black">Contact</span>
+                  </button>
+                  <ButtonLink
+                    href="https://cal.com/madewithmake/meeting"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="h-8 w-full bg-black text-sm text-white hover:bg-black/90"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span>Book a Call</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </ButtonLink>
+                </div>
               </div>
             </div>
           )}

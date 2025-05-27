@@ -8,14 +8,17 @@ import WhyWorkWithMe from "./components/why-work-with-me";
 import Footer from "./components/footer";
 import Testimonials from "./components/testimonials";
 import Founder from "./components/founder";
+import { getAllPosts } from "@/lib/contentful";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getAllPosts();
+
   return (
     <main>
       <Hero />
       <WhatWeAutomate />
       <HowItWorks />
-      <CaseStudies />
+      <CaseStudies posts={posts} />
       <Testimonials />
       <Founder />
       <LeadMagnet />
