@@ -67,21 +67,26 @@ const LeadMagnet = () => {
   }, []);
 
   return (
-    <section 
+    <section
       className="padding flex flex-col items-center justify-center py-12 sm:py-16"
       aria-labelledby="lead-magnet-heading"
     >
-      <h2 
+      <h2
         id="lead-magnet-heading"
-        className="mb-4 sm:mb-8 text-3xl sm:text-4xl font-semibold text-center"
+        className="mb-4 text-center text-3xl font-semibold sm:mb-8 sm:text-4xl"
       >
         Try Our Automation
       </h2>
-      <p className="mb-6 sm:mb-8 text-base sm:text-lg text-center max-w-2xl mx-auto text-black/70">
-        Get a free automation audit and discover how much time you could save. We'll analyze your current workflow and provide a personalized report with actionable recommendations.
+      <p className="mx-auto mb-3 max-w-2xl text-center text-base text-black/70 sm:mb-8 sm:text-lg">
+        This is a lightweight version of the system I build for clients — the
+        kind that turns hours of writing into a few clicks.
+      </p>
+      <p className="mx-auto mb-3 max-w-2xl text-center text-base text-black/70 sm:mb-8 sm:text-lg">
+        Fill in a few quick details, hit submit, and watch what happens. In less
+        than a minute, you’ll get a simple, personalized proposal in your inbox.
       </p>
 
-      <div className="w-full max-w-3xl mx-auto">
+      <div className="mx-auto w-full max-w-3xl">
         <iframe
           data-tally-src="https://tally.so/embed/3j2Ng9?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
           loading="lazy"
