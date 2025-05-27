@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { ArrowRight, Clock, Zap, BarChart } from "lucide-react";
 import { Button, ButtonLink } from "@/components/ui/button";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -16,7 +16,7 @@ const Hero = () => {
 
   return (
     <section 
-      className="padding relative overflow-hidden rounded-xl py-12 sm:py-16 md:py-20 lg:py-24"
+      className="padding relative overflow-hidden rounded-xl py-16 sm:py-20 md:py-24 lg:py-32"
       aria-label="Hero section"
     >
       {/* Background Video */}
@@ -39,16 +39,16 @@ const Hero = () => {
 
       <div className="relative z-10">
         <div className="mx-auto max-w-6xl">
-          <div className="grid items-center gap-8 lg:gap-16 lg:grid-cols-2">
+          <div className="grid items-center gap-12 lg:gap-20 lg:grid-cols-2">
             {/* Left Column - Main Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="space-y-4 sm:space-y-6"
+              className="space-y-6 sm:space-y-8"
             >
-              <h1 className="text-balance pb-2 sm:pb-4 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-white">
-                <span className="block">Stop wasting time on</span>
+              <h1 className="text-balance pb-4 sm:pb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-white">
+                <span className="block mb-2">Stop wasting time on</span>
                 <span className="text-white underline underline-offset-8 decoration-2">
                   repetitive tasks
                 </span>
@@ -58,7 +58,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-sm sm:text-base text-white/90 max-w-2xl"
+                className="text-base sm:text-lg text-white/90 max-w-2xl leading-relaxed"
               >
                 Most B2B teams waste{" "}
                 <span className="font-bold text-white">40+ hours monthly</span>{" "}
@@ -77,11 +77,11 @@ const Hero = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   size="lg"
-                  className="flex flex-row items-center justify-center rounded-lg bg-fog text-black hover:bg-fog/90 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors"
+                  className="flex flex-row items-center justify-center rounded-lg bg-fog text-black hover:bg-fog/90 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors text-base sm:text-lg px-6 py-3"
                   aria-label="Book a free consultation to save 40+ hours"
                 >
                   Save 40+ hours — Book a free consultation
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                  <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
                 </ButtonLink>
               </motion.div>
             </motion.div>
@@ -91,18 +91,18 @@ const Hero = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="space-y-4 sm:space-y-6"
+              className="space-y-6 sm:space-y-8"
             >
-              <div className="rounded-xl bg-gradient-to-r from-white/10 to-white/5 p-4 sm:p-6 backdrop-blur-md">
-                <div className="flex items-start space-x-3 sm:space-x-4">
-                  <div className="rounded-full bg-white/90 p-2" aria-hidden="true">
-                    <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-maroon" />
+              <div className="rounded-xl bg-gradient-to-r from-white/10 to-white/5 p-6 sm:p-8 backdrop-blur-md">
+                <div className="flex items-start space-x-4 sm:space-x-5">
+                  <div className="rounded-full bg-white/90 p-2.5 sm:p-3" aria-hidden="true">
+                    <Clock className="h-6 w-6 sm:h-7 sm:w-7 text-maroon" />
                   </div>
                   <div>
-                    <h3 className="mb-1 sm:mb-2 text-base sm:text-lg font-semibold text-white">
+                    <h3 className="mb-2 sm:mb-3 text-lg sm:text-xl font-semibold text-white">
                       Seamless Integration
                     </h3>
-                    <p className="text-sm sm:text-base text-white/80">
+                    <p className="text-base sm:text-lg text-white/80 leading-relaxed">
                       We build invisible automation that plugs into your
                       existing tools. No learning curves, no new systems.
                     </p>
@@ -110,16 +110,16 @@ const Hero = () => {
                 </div>
               </div>
 
-              <div className="rounded-xl bg-gradient-to-r from-white/10 to-white/5 p-4 sm:p-6 backdrop-blur-md">
-                <div className="flex items-start space-x-3 sm:space-x-4">
-                  <div className="rounded-full bg-white/90 p-2" aria-hidden="true">
-                    <BarChart className="h-5 w-5 sm:h-6 sm:w-6 text-maroon" />
+              <div className="rounded-xl bg-gradient-to-r from-white/10 to-white/5 p-6 sm:p-8 backdrop-blur-md">
+                <div className="flex items-start space-x-4 sm:space-x-5">
+                  <div className="rounded-full bg-white/90 p-2.5 sm:p-3" aria-hidden="true">
+                    <BarChart className="h-6 w-6 sm:h-7 sm:w-7 text-maroon" />
                   </div>
                   <div>
-                    <h3 className="mb-1 sm:mb-2 text-base sm:text-lg font-semibold text-white">
+                    <h3 className="mb-2 sm:mb-3 text-lg sm:text-xl font-semibold text-white">
                       Smart Workflows
                     </h3>
-                    <p className="text-sm sm:text-base text-white/80">
+                    <p className="text-base sm:text-lg text-white/80 leading-relaxed">
                       Smart workflows that turn your busywork into background
                       processes. Stop chasing deals. Start closing them.
                     </p>
