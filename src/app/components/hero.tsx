@@ -72,7 +72,7 @@ const Hero = () => {
                   size="lg"
                   className="flex flex-row items-center rounded-lg bg-fog text-black"
                 >
-                  Get Started
+                  Save 40+ hours — Book a free consultation
                   {/* <ArrowRight className="ml-2 h-4 w-4" /> */}
                 </Button>
                 {/* <Button

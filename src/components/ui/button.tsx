@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "group relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -50,12 +50,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {/* Text Glitch */}
-        <div className="relative w-full overflow-hidden">
-          <span className="invisible">{children}</span>
-          <span className="absolute left-0 top-0 w-full font-semibold transition-transform duration-500 ease-in-out hover:duration-300 group-hover:-translate-y-full">
+        <div className="relative inline-block overflow-hidden px-2">
+          <span className="invisible whitespace-nowrap">{children}</span>
+          <span className="absolute left-0 top-0 w-[calc(100%-1px)] font-semibold transition-transform duration-500 ease-in-out hover:duration-300 group-hover:-translate-y-full whitespace-nowrap">
             {children}
           </span>
-          <span className="absolute left-0 top-0 w-full translate-y-full font-semibold transition-transform duration-500 ease-in-out hover:duration-300 group-hover:translate-y-0">
+          <span className="absolute left-0 top-0 w-[calc(100%-1px)] translate-y-full font-semibold transition-transform duration-500 ease-in-out hover:duration-300 group-hover:translate-y-0 whitespace-nowrap">
             {children}
           </span>
         </div>
