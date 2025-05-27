@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+import { Linkedin, Mail } from "lucide-react";
 
 const Founder = () => {
   return (
@@ -22,6 +24,26 @@ const Founder = () => {
           <p className="mb-4 font-medium text-lg sm:text-xl text-black">
             Wambui Ndung'u — Based in Nairobi and the internet.
           </p>
+          <div className="flex items-center gap-4 mb-6">
+            <Link
+              href="https://www.linkedin.com/in/wambui-ndungu-210409193"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-black/70 hover:text-black transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-sm"
+              aria-label="Connect with Wambui on LinkedIn"
+            >
+              <Linkedin className="h-5 w-5 stroke-2" aria-hidden="true" />
+              {/* <span>LinkedIn</span> */}
+            </Link>
+            <Link
+              href="mailto:wambui@madewithmake.com"
+              className="inline-flex items-center gap-2 text-black/70 hover:text-black transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-sm"
+              aria-label="Email Wambui"
+            >
+              <Mail className="h-5 w-5 stroke-2" aria-hidden="true" />
+              {/* <span>wambui@madewithmake.com</span> */}
+            </Link>
+          </div>
           <div className="space-y-4 text-base sm:text-lg">
             <p className="text-black/70">
               I've always been drawn to how things work — the mechanics behind

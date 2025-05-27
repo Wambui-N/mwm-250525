@@ -43,9 +43,9 @@ export default async function BlogPage({
     : posts;
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen padding">
       {/* Hero Section */}
-      <section className="padding relative overflow-hidden rounded-xl py-24">
+      <section className="relative overflow-hidden rounded-xl py-12">
         <div className="relative z-10">
           <div className="">
             <div className="flex flex-col items-center text-center">
@@ -67,7 +67,7 @@ export default async function BlogPage({
 
       {/* Tags Filter */}
       {allTags.length > 0 && (
-        <section className="padding py-8">
+        <section className=" py-2">
           <div className="container mx-auto">
             <div className="flex flex-wrap justify-center gap-4">
               <Link
@@ -99,7 +99,7 @@ export default async function BlogPage({
       )}
 
       {/* Blog Posts Grid */}
-      <section className="padding py-12">
+      <section className="py-12">
         <div className="">
           {filteredPosts.length === 0 ? (
             <div className="text-center py-12">
