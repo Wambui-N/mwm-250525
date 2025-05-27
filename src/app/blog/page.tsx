@@ -1,4 +1,4 @@
-import { getAllPosts, getPostsByTag } from "@/lib/contentful";
+import { getAllPosts, getPostsByTag, BlogPost } from "@/lib/contentful";
 import Link from "next/link";
 import { BlogCard } from "@/app/components/blog-card";
 
@@ -24,7 +24,10 @@ export default async function BlogPage({
   const allTags = Array.from(
     new Set(
       posts
-        .flatMap((post) => post.fields.tags || [])
+        .flatMap((post) => {
+          const tags = post.fields.tags as string[] | undefined;
+          return tags?.filter(Boolean) || [];
+        })
         .filter((tag): tag is string => Boolean(tag))
     )
   ).sort();
@@ -33,7 +36,10 @@ export default async function BlogPage({
 
   // Filter posts if a tag is selected
   const filteredPosts = searchParams.tag && posts.length > 0
-    ? posts.filter(post => post.fields.tags && post.fields.tags.includes(searchParams.tag!))
+    ? posts.filter(post => {
+        const tags = post.fields.tags as string[] | undefined;
+        return tags?.includes(searchParams.tag!) ?? false;
+      })
     : posts;
 
   return (

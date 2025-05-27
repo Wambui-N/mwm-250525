@@ -19,15 +19,22 @@ const client = contentful.createClient({
 });
 
 export interface BlogPost {
+  contentTypeId: string;
   sys: {
     id: string;
   };
   fields: {
     title: string;
     body: Document;
-    image: contentful.Asset;
+    image: {
+      fields: {
+        file: {
+          url: string;
+        };
+      };
+    };
     tags?: string[];
-    recommendedPosts?: contentful.Entry<BlogPost>[];
+    recommendedPosts?: contentful.Entry<BlogPost & { contentTypeId: string }>[];
   };
 }
 
@@ -65,12 +72,12 @@ async function getContentTypeId(): Promise<string> {
   }
 }
 
-export async function getAllPosts(): Promise<BlogPost[]> {
+export async function getAllPosts(): Promise<contentful.Entry<BlogPost>[]> {
   try {
     const contentTypeId = await getContentTypeId();
     const response = await client.getEntries<BlogPost>({
       content_type: contentTypeId,
-      order: '-sys.createdAt',
+      order: ['-sys.createdAt'],
       include: 2, // To include linked entries like images and recommended posts
     });
     return response.items;
@@ -80,15 +87,15 @@ export async function getAllPosts(): Promise<BlogPost[]> {
   }
 }
 
-export async function getPostsByTag(tag: string): Promise<BlogPost[]> {
+export async function getPostsByTag(tag: string): Promise<contentful.Entry<BlogPost>[]> {
   try {
     const contentTypeId = await getContentTypeId();
     const response = await client.getEntries<BlogPost>({
       content_type: contentTypeId,
-      'fields.tags[in]': tag,
-      order: '-sys.createdAt',
+      order: ['-sys.createdAt'],
       include: 2,
-    });
+      'fields.tags[in]': tag,
+    } as any);
     return response.items;
   } catch (error) {
     console.error(`Error fetching posts by tag '${tag}':`, error);
@@ -96,7 +103,7 @@ export async function getPostsByTag(tag: string): Promise<BlogPost[]> {
   }
 }
 
-export async function getPostById(id: string): Promise<BlogPost | null> {
+export async function getPostById(id: string): Promise<contentful.Entry<BlogPost> | null> {
   try {
     const response = await client.getEntry<BlogPost>(id, { include: 2 });
     return response;

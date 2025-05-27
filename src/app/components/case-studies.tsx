@@ -4,16 +4,17 @@ import React from "react";
 import { motion } from "motion/react";
 import { BlogPost } from "@/lib/contentful";
 import { BlogCard } from "./blog-card";
+import { Entry } from "contentful";
 
 interface CaseStudiesProps {
-  posts: BlogPost[];
+  posts: Entry<BlogPost>[];
 }
 
 const CaseStudies = ({ posts }: CaseStudiesProps) => {
-  const caseStudies = posts.filter(post => 
-    post.fields.tags?.includes('Case Study') || 
-    post.fields.tags?.includes('case study')
-  );
+  const caseStudies = posts.filter(post => {
+    const tags = post.fields.tags as string[] | undefined;
+    return tags?.includes('Case Study') || tags?.includes('case study');
+  });
 
   if (caseStudies.length === 0) {
     return null; // Don't show the section if there are no case studies

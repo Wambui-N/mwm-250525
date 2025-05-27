@@ -66,6 +66,23 @@ const options: Options = {
   },
 };
 
+type ContentfulImage = {
+  fields: {
+    file: {
+      url: string;
+    };
+  };
+};
+
+function isContentfulImage(image: any): image is ContentfulImage {
+  return (
+    image &&
+    typeof image === "object" &&
+    image.fields?.file?.url &&
+    typeof image.fields.file.url === "string"
+  );
+}
+
 export default async function BlogPostPage({
   params,
 }: {
@@ -104,21 +121,22 @@ export default async function BlogPostPage({
                 Back to Blog
               </Link>
               <div className="mb-3">
-                {post.fields.tags && post.fields.tags.length > 0 && (
-                  <div className="flex items-center gap-1 text-sm text-black/50">
-                    {post.fields.tags.map((tag, index) => (
-                      <span key={tag}>
-                        {tag}
-                        {index < post.fields.tags!.length - 1 && (
-                          <span className="mx-1">•</span>
-                        )}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                {Array.isArray(post.fields.tags) && post.fields.tags.length > 0 && (() => {
+                  const tags = post.fields.tags as string[];
+                  return (
+                    <div className="flex items-center gap-1 text-sm text-black/50">
+                      {tags.map((tag: string, index: number) => (
+                        <span key={tag || index}>
+                          {tag}
+                          {index < tags.length - 1 ? <span className="mx-1">•</span> : null}
+                        </span>
+                      ))}
+                    </div>
+                  );
+                })()}
               </div>
               <h1 className="text-balance pb-4 text-2xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl">
-                {post.fields.title}
+                {post.fields.title as unknown as string}
               </h1>
             </div>
           </div>
@@ -130,8 +148,14 @@ export default async function BlogPostPage({
         <div className="container mx-auto">
           <div className="relative aspect-[21/8] overflow-hidden rounded-xl">
             <Image
-              src={`https:${post.fields.image?.fields?.file?.url}`}
-              alt={post.fields.title}
+              src={
+                isContentfulImage(post.fields.image)
+                  ? `https:${post.fields.image.fields!.file!.url!}`
+                  : ""
+              }
+              alt={
+                post.fields.title as unknown as string
+              }
               fill
               className="object-cover"
               priority
@@ -145,14 +169,28 @@ export default async function BlogPostPage({
         <div className="container mx-auto">
           <div className="mx-auto max-w-3xl">
             <div className="prose prose-lg">
-              {documentToReactComponents(post.fields.body, options)}
+              {(() => {
+                try {
+                  if (
+                    post.fields.body &&
+                    typeof post.fields.body === "object" &&
+                    "nodeType" in post.fields.body &&
+                    Array.isArray(post.fields.body.content)
+                  ) {
+                    return documentToReactComponents(post.fields.body as any, options);
+                  }
+                  return null;
+                } catch {
+                  return null;
+                }
+              })()}
             </div>
           </div>
         </div>
       </section>
 
       {/* Recommended Posts */}
-      {post.fields.recommendedPosts && post.fields.recommendedPosts.length > 0 && (
+      {Array.isArray(post.fields.recommendedPosts) && post.fields.recommendedPosts.length > 0 && (
         <section className="padding py-16">
           <div className="container mx-auto">
             <div className="mb-12 text-center">
@@ -161,10 +199,9 @@ export default async function BlogPostPage({
               </h2>
             </div>
             <div className="grid gap-8 md:grid-cols-2">
-              {post.fields.recommendedPosts.map((recommendedPost) => {
-                const post = recommendedPost as unknown as BlogPost;
-                return <BlogCard key={post.sys.id} post={post} />;
-              })}
+              {post.fields.recommendedPosts.map((recommendedPost: any, idx: number) => (
+                <BlogCard key={recommendedPost.sys?.id || idx} post={recommendedPost} />
+              ))}
             </div>
           </div>
         </section>

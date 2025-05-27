@@ -2,14 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BlogPost } from "@/lib/contentful";
+import { Entry } from "contentful";
 
 interface BlogCardProps {
-  post: BlogPost;
+  post: Entry<BlogPost>;
   className?: string;
 }
 
 export function BlogCard({ post, className = "" }: BlogCardProps) {
-  const imageUrl = post.fields.image?.fields?.file?.url;
+  const imageUrl = ((post.fields.image as unknown) as { fields?: { file?: { url?: string } } })?.fields?.file?.url;
 
   return (
     <Link
@@ -20,7 +21,7 @@ export function BlogCard({ post, className = "" }: BlogCardProps) {
         <div className="relative aspect-video overflow-hidden">
           <Image
             src={`https:${imageUrl}`}
-            alt={post.fields.title || 'Blog post image'}
+            alt={typeof post.fields.title === 'string' ? post.fields.title : 'Blog post image'}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
@@ -28,12 +29,12 @@ export function BlogCard({ post, className = "" }: BlogCardProps) {
         </div>
       )}
       <div className="flex flex-1 flex-col p-6">
-        {post.fields.tags && post.fields.tags.length > 0 && (
+        {Array.isArray(post.fields.tags) && post.fields.tags.length > 0 && (
           <div className="mb-3 flex items-center gap-1 text-xs text-black/50">
-            {post.fields.tags.map((tag, index) => (
+            {post.fields.tags?.map((tag: string, index: number) => (
               <span key={tag}>
                 {tag}
-                {index < post.fields.tags!.length - 1 && (
+                {index < (post.fields.tags?.length ?? 0) - 1 && (
                   <span className="mx-1">•</span>
                 )}
               </span>
@@ -41,7 +42,7 @@ export function BlogCard({ post, className = "" }: BlogCardProps) {
           </div>
         )}
         <h3 className="mb-3 text-xl font-semibold group-hover:text-black/80">
-          {post.fields.title || 'Untitled Post'}
+          {typeof post.fields.title === 'string' ? post.fields.title : 'Untitled Post'}
         </h3>
         <div className="mt-auto flex items-center text-sm font-medium text-black/70 group-hover:text-black">
           Read More
