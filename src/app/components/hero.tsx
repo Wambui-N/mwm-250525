@@ -91,7 +91,7 @@ const Hero = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="space-y-4 sm:space-y-6"
+              className="space-y-6 sm:space-y-6"
             >
               <div className="rounded-xl bg-gradient-to-r from-white/10 to-white/5 p-4 sm:p-6 backdrop-blur-md">
                 <div className="flex items-start space-x-3 sm:space-x-4">
