@@ -73,7 +73,7 @@ const Founder = () => {
             width={400}
             height={400}
             className="rounded-none object-contain object-right grayscale"
-            priority
+            loading="lazy"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 300px, 400px"
           />
           <div 
