@@ -3,7 +3,8 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { ChevronDown } from "lucide-react";
 
 interface NavLinkProps {
   href: string;
@@ -14,6 +15,8 @@ const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -44,6 +47,20 @@ const Nav = () => {
     };
   }, [lastScrollY]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
+        setIsServicesOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const NavLink: React.FC<NavLinkProps> = ({ href, children }) => (
     <Link
       href={href}
@@ -52,6 +69,12 @@ const Nav = () => {
       <span className="text-black">{children}</span>
     </Link>
   );
+
+  const services = [
+    { name: "Proposal Generation", href: "/services/proposal-generation" },
+    { name: "Follow-up Sequences", href: "/services/follow-up-sequences" },
+    { name: "Web Scraping", href: "/services/web-scraping" },
+  ];
 
   return (
     <nav
@@ -79,7 +102,29 @@ const Nav = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden items-center space-x-6 md:flex">
-              <NavLink href="/">Services</NavLink>
+              <div className="relative" ref={servicesRef}>
+                <button
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className="flex items-center gap-1 text-black hover:text-black/80"
+                >
+                  Services
+                  <ChevronDown className={`h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`} />
+                </button>
+                {isServicesOpen && (
+                  <div className="absolute left-0 top-full mt-2 w-48 rounded-lg border border-black/10 bg-white py-2 shadow-lg">
+                    {services.map((service) => (
+                      <Link
+                        key={service.href}
+                        href={service.href}
+                        className="block px-4 py-2 text-sm text-black hover:bg-black/5"
+                        onClick={() => setIsServicesOpen(false)}
+                      >
+                        {service.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
               <NavLink href="/">Projects</NavLink>
               <NavLink href="/">About</NavLink>
               <NavLink href="/">Contact</NavLink>
@@ -116,7 +161,32 @@ const Nav = () => {
           {isMenuOpen && (
             <div className="mt-2 pb-2 md:hidden">
               <div className="flex flex-col space-y-3">
-                <NavLink href="/">Services</NavLink>
+                <div className="flex flex-col space-y-2">
+                  <button
+                    onClick={() => setIsServicesOpen(!isServicesOpen)}
+                    className="flex items-center justify-between text-black"
+                  >
+                    Services
+                    <ChevronDown className={`h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {isServicesOpen && (
+                    <div className="ml-4 flex flex-col space-y-2">
+                      {services.map((service) => (
+                        <Link
+                          key={service.href}
+                          href={service.href}
+                          className="text-sm text-black/70 hover:text-black"
+                          onClick={() => {
+                            setIsServicesOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                        >
+                          {service.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <NavLink href="/">Projects</NavLink>
                 <NavLink href="/">About</NavLink>
                 <NavLink href="/">Contact</NavLink>

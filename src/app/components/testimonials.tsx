@@ -6,28 +6,11 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Help us improve our productivity",
     description:
-      "The automation has saved us countless hours. What used to take days now happens in minutes. The team understood our needs perfectly and delivered a solution that's been running flawlessly for months.",
-    author: "Samantha William",
-    role: "Senior Designer at Design Studio",
+      "I enjoyed working with Wambui on automating our proposal process. She is honest, professional, and ensures that she follows through on what she promises. I would definitely recommend working with her.",
+    author: "Joyce Kayima",
+    role: "Founder's Freedom",
     avatar: "/testimonials/samantha.jpg",
-  },
-  {
-    quote: "Seamless integration and support",
-    description:
-      "We were able to scale our operations without hiring more staff. The automation just works, and the support is fantastic.",
-    author: "Michael Rodriguez",
-    role: "CEO at GrowthLabs",
-    avatar: "/testimonials/michael.jpg",
-  },
-  {
-    quote: "Immediate ROI for our team",
-    description:
-      "The ROI was immediate. We're now handling 3x the volume with the same team. Highly recommended!",
-    author: "Emma Thompson",
-    role: "Founder at ScaleUp Agency",
-    avatar: "/testimonials/emma.jpg",
   },
 ];
 
@@ -66,7 +49,7 @@ const Testimonials = () => {
       <div className="flex min-h-[400px] flex-col overflow-hidden rounded-2xl bg-white shadow-lg md:flex-row">
         {/* Left: Heading */}
         <div className="relative flex flex-1 flex-col items-start justify-center rounded-t-2xl bg-black bg-gradient-to-b from-black via-black to-maroon/50 p-10 md:rounded-l-2xl md:rounded-br-none md:rounded-tr-none">
-          <div className=" w-full">
+          <div className="w-full">
             {/* <span className="absolute left-12 top-24 text-white/20">
               <Quote className="w-28 h-28 stroke-[0.75]" />
             </span> */}
@@ -104,9 +87,6 @@ const Testimonials = () => {
             </button>
           </div>
           <div className="w-full transition-all duration-500 ease-in-out">
-            <h3 className="mb-2 text-xl font-semibold text-black/90">
-              {t.quote}
-            </h3>
             <p className="mx-auto mb-6 max-w-md text-black/60">
               {t.description}
             </p>

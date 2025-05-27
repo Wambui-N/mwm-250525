@@ -9,10 +9,10 @@ const WhatWeAutomate = () => {
   const automations = [
     {
       icon: Search,
-      title: "Web Scraping for Leads",
+      title: "Lead Generation",
       description:
         "Wake up to fresh, qualified leads—automatically gathered overnight.",
-      href: "/services/web-scraping",
+      href: "/services/lead-generation",
       isPopular: false,
     },
     {
