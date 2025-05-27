@@ -58,7 +58,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-sm sm:text-base text-white/90 max-w-2xl"
+                className="text-sm sm:text-base text-white/90 max-w-2xl leading-relaxed md:leading-normal"
               >
                 Most B2B teams waste{" "}
                 <span className="font-bold text-white">40+ hours monthly</span>{" "}
