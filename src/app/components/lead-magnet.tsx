@@ -67,21 +67,33 @@ const LeadMagnet = () => {
   }, []);
 
   return (
-    <section className="padding flex flex-col items-center justify-center py-16">
-      <h2 className="mb-8 text-4xl font-semibold">Try Our Automation</h2>
-      <p className="mb-8 text-lg text-center w-1/2 text-black/70">
-      Get a free automation audit and discover how much time you could save. We'll analyze your current workflow and provide a personalized report with actionable recommendations.
+    <section 
+      className="padding flex flex-col items-center justify-center py-12 sm:py-16"
+      aria-labelledby="lead-magnet-heading"
+    >
+      <h2 
+        id="lead-magnet-heading"
+        className="mb-4 sm:mb-8 text-3xl sm:text-4xl font-semibold text-center"
+      >
+        Try Our Automation
+      </h2>
+      <p className="mb-6 sm:mb-8 text-base sm:text-lg text-center max-w-2xl mx-auto text-black/70">
+        Get a free automation audit and discover how much time you could save. We'll analyze your current workflow and provide a personalized report with actionable recommendations.
       </p>
 
-      <iframe
-        data-tally-src="https://tally.so/embed/3j2Ng9?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-        loading="lazy"
-        width="70%"
-        height="176"
-        frameBorder="0"
-        style={{ margin: 0 }}
-        title="Lead Magnet Automation"
-      />
+      <div className="w-full max-w-3xl mx-auto">
+        <iframe
+          data-tally-src="https://tally.so/embed/3j2Ng9?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+          loading="lazy"
+          width="100%"
+          height="176"
+          frameBorder="0"
+          style={{ margin: 0 }}
+          title="Automation Audit Form"
+          aria-label="Automation audit form"
+          className="rounded-lg"
+        />
+      </div>
     </section>
   );
 };

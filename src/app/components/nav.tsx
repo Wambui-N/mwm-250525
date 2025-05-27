@@ -17,6 +17,7 @@ const Nav = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -67,9 +68,10 @@ const Nav = () => {
   const NavLink: React.FC<NavLinkProps> = ({ href, children }) => (
     <Link
       href={href}
-      className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+      className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-sm"
+      aria-label={`Navigate to ${children}`}
     >
-      <span className="text-base  text-black">{children}</span>
+      <span className="text-base text-black">{children}</span>
     </Link>
   );
 
@@ -97,23 +99,24 @@ const Nav = () => {
   return (
     <nav
       className={`sticky top-0 z-50 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
+      role="navigation"
+      aria-label="Main navigation"
     >
       <div className="w-full bg-fog py-3">
         <div className="padding rounded-lg">
           <div className="flex items-center justify-between">
-            {/* <Link href="/">
-                <Image src="/logo.png" alt="logo" width={100} height={100} />
-            </Link> */}
             <Link
               href="/"
-              className="flex items-center gap-1 text-lg font-bold text-black"
+              className="flex items-center gap-1 text-lg font-bold text-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-sm"
+              aria-label="Home"
             >
               <Image
                 src="/logo.svg"
-                alt="logo"
+                alt="Made With Make logo"
                 width={36}
                 height={36}
                 className="mr-2 inline-block"
+                priority
               />
               <h3>Made With Make</h3>
             </Link>
@@ -122,16 +125,18 @@ const Nav = () => {
             <div className="hidden items-center space-x-6 md:flex">
               <div className="relative" ref={servicesRef}>
                 <button
-                  className="flex items-center gap-1 text-base text-black"
+                  className="flex items-center gap-1 text-base text-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-sm"
                   onMouseEnter={() => setIsServicesOpen(true)}
                   onMouseLeave={() => setIsServicesOpen(false)}
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  aria-expanded={isServicesOpen}
+                  aria-haspopup="true"
                 >
                   Services
-                  <ChevronDown className="h-4 w-4" />
+                  <ChevronDown className={`h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`} />
                 </button>
                 {isServicesOpen && (
                   <>
-                    {/* Invisible bridge to maintain hover state */}
                     <div
                       className="absolute left-0 top-full h-2 w-full"
                       onMouseEnter={() => setIsServicesOpen(true)}
@@ -141,12 +146,15 @@ const Nav = () => {
                       className="absolute left-0 top-[calc(100%+0.5rem)] w-48 rounded-lg border border-black/10 bg-white py-2 shadow-lg"
                       onMouseEnter={() => setIsServicesOpen(true)}
                       onMouseLeave={() => setIsServicesOpen(false)}
+                      role="menu"
+                      aria-label="Services menu"
                     >
                       {services.map((service) => (
                         <Link
                           key={service.href}
                           href={service.href}
-                          className="block px-4 py-2 text-base text-black hover:bg-black/5"
+                          className="block px-4 py-2 text-base text-black hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-sm"
+                          role="menuitem"
                         >
                           {service.name}
                         </Link>
@@ -159,7 +167,8 @@ const Nav = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={scrollToFooter}
-                  className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+                  className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-sm"
+                  aria-label="Scroll to contact section"
                 >
                   <span className="text-base text-black">Contact</span>
                 </button>
@@ -167,18 +176,22 @@ const Nav = () => {
                   href="https://cal.com/madewithmake/meeting"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-8 bg-black ml-3 px-4 text-sm text-white hover:bg-black/90"
+                  className="h-8 bg-black ml-3 px-4 text-sm text-white hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 rounded-sm"
+                  aria-label="Book a call"
                 >
                   <span>Book a Call</span>
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </ButtonLink>
               </div>
             </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="rounded-lg p-1.5 text-black transition-colors hover:bg-black/5 md:hidden"
+              ref={menuButtonRef}
+              className="rounded-lg p-1.5 text-black transition-colors hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 md:hidden"
               onClick={toggleMenu}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
               aria-label="Toggle menu"
             >
               <svg
@@ -189,6 +202,7 @@ const Nav = () => {
                 strokeWidth="2"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 {isMenuOpen ? (
                   <path d="M6 18L18 6M6 6l12 12" />
@@ -201,25 +215,39 @@ const Nav = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="mt-2 pb-2 md:hidden">
+            <div 
+              id="mobile-menu"
+              className="mt-2 pb-2 md:hidden"
+              role="menu"
+              aria-label="Mobile menu"
+            >
               <div className="flex flex-col space-y-3">
                 <div className="flex flex-col space-y-2">
                   <button
                     onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="flex items-center justify-between text-black"
+                    className="flex items-center justify-between text-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-sm"
+                    aria-expanded={isServicesOpen}
+                    aria-controls="mobile-services-menu"
                   >
                     Services
                     <ChevronDown
                       className={`h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`}
+                      aria-hidden="true"
                     />
                   </button>
                   {isServicesOpen && (
-                    <div className="ml-4 flex flex-col space-y-2">
+                    <div 
+                      id="mobile-services-menu"
+                      className="ml-4 flex flex-col space-y-2"
+                      role="menu"
+                      aria-label="Mobile services menu"
+                    >
                       {services.map((service) => (
                         <Link
                           key={service.href}
                           href={service.href}
-                          className="text-sm text-black/70 hover:text-black"
+                          className="text-sm text-black/70 hover:text-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-sm"
+                          role="menuitem"
                           onClick={() => {
                             setIsServicesOpen(false);
                             setIsMenuOpen(false);
@@ -238,7 +266,8 @@ const Nav = () => {
                       scrollToFooter();
                       setIsMenuOpen(false);
                     }}
-                    className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+                    className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded-sm"
+                    aria-label="Scroll to contact section"
                   >
                     <span className="text-base text-black">Contact</span>
                   </button>
@@ -246,11 +275,12 @@ const Nav = () => {
                     href="https://cal.com/madewithmake/meeting"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="h-8 w-full bg-black text-sm text-white hover:bg-black/90"
+                    className="h-8 w-full bg-black text-sm text-white hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 rounded-sm"
                     onClick={() => setIsMenuOpen(false)}
+                    aria-label="Book a call"
                   >
                     <span>Book a Call</span>
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </ButtonLink>
                 </div>
               </div>

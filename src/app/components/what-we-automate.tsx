@@ -34,21 +34,29 @@ const WhatWeAutomate = () => {
   ];
 
   return (
-    <section className="padding py-16">
+    <section 
+      className="padding py-12 sm:py-16"
+      aria-labelledby="automation-heading"
+    >
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="mb-12 text-center"
+          className="mb-8 sm:mb-12 text-center"
         >
-          <h2 className="mb-2 text-4xl font-semibold">What We Automate</h2>
-          <p className="text-lg text-black/70">
+          <h2 
+            id="automation-heading" 
+            className="mb-2 text-3xl sm:text-4xl font-semibold"
+          >
+            What We Automate
+          </h2>
+          <p className="text-base sm:text-lg text-black/70">
             The work that used to take hours now happens automatically:
           </p>
         </motion.div>
-        <div className="flex flex-col gap-12 md:flex-row md:items-stretch md:justify-center">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {automations.map((automation, index) => (
             <motion.div
               key={automation.title}
@@ -56,20 +64,15 @@ const WhatWeAutomate = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative min-w-[280px] max-w-xs flex-shrink-0 rounded-lg p-6 py-8 md:max-w-sm ${
+              className={`relative flex flex-col rounded-lg p-5 sm:p-6 sm:py-8 ${
                 automation.isPopular
                   ? "bg-black bg-gradient-to-b from-black via-black to-maroon/50"
                   : "bg-none text-maroon"
               }`}
             >
-              {/* {automation.isPopular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-maroon text-white px-3 py-1 rounded-lg text-sm font-medium">
-                  Popular
-                </div>
-              )} */}
-              <div className="mb-10 w-fit rounded-full">
+              <div className="mb-6 sm:mb-10 w-fit rounded-full" aria-hidden="true">
                 <automation.icon
-                  className={`h-10 w-10 stroke-[1.2] ${
+                  className={`h-8 w-8 sm:h-10 sm:w-10 stroke-[1.2] ${
                     automation.isPopular ? "text-white" : "text-black"
                   }`}
                 />
@@ -82,7 +85,7 @@ const WhatWeAutomate = () => {
                 {automation.title}
               </h3>
               <p
-                className={`mb-4 text-base leading-6 ${
+                className={`mb-4 text-sm sm:text-base leading-6 ${
                   automation.isPopular ? "text-white/70" : "text-black/70"
                 }`}
               >
@@ -90,14 +93,18 @@ const WhatWeAutomate = () => {
               </p>
               <Link
                 href={automation.href}
-                className={`group inline-flex items-center text-base font-medium leading-6 ${
+                className={`group mt-auto inline-flex items-center text-sm sm:text-base font-medium leading-6 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-sm ${
                   automation.isPopular
-                    ? "text-white hover:text-white/80"
-                    : "text-black hover:text-black/80"
+                    ? "text-white hover:text-white/80 focus:ring-white"
+                    : "text-black hover:text-black/80 focus:ring-black"
                 }`}
+                aria-label={`Learn more about ${automation.title}`}
               >
                 Learn more
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight 
+                  className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" 
+                  aria-hidden="true"
+                />
               </Link>
             </motion.div>
           ))}

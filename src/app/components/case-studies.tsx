@@ -21,21 +21,33 @@ const CaseStudies = ({ posts }: CaseStudiesProps) => {
   }
 
   return (
-    <section className="py-16">
+    <section 
+      className="py-12 sm:py-16"
+      aria-labelledby="case-studies-heading"
+    >
       <div className="padding">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center"
+          className="mb-8 sm:mb-12 text-center"
         >
-          <h2 className="mb-4 text-4xl font-semibold">Case Studies</h2>
-          <p className="text-black/70">
+          <h2 
+            id="case-studies-heading" 
+            className="mb-3 sm:mb-4 text-3xl sm:text-4xl font-semibold"
+          >
+            Case Studies
+          </h2>
+          <p className="text-base sm:text-lg text-black/70 max-w-2xl mx-auto">
             See how we've helped businesses transform their operations
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
+          role="list"
+          aria-label="Case studies list"
+        >
           {caseStudies.map((post, index) => (
             <motion.div
               key={post.sys.id}
@@ -43,6 +55,7 @@ const CaseStudies = ({ posts }: CaseStudiesProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              role="listitem"
             >
               <BlogCard post={post} />
             </motion.div>
