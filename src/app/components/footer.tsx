@@ -96,14 +96,14 @@ const Footer = () => {
                     Case Studies
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     href="/about"
                     className="text-sm sm:text-base text-white/70 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black rounded-sm"
                   >
                     About
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     href="/blog"
