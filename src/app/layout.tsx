@@ -6,13 +6,21 @@ import Nav from "./components/nav";
 import { satoshi, brule } from "./fonts/fonts";
 
 export const metadata: Metadata = {
-  title: "Made With Make - Custom Automation Solutions",
+  metadataBase: new URL("https://madewithmake.com"),
+  title: {
+    default: "Made With Make - Custom Automation Solutions",
+    template: "%s | Made With Make",
+  },
   description: "Transform your business with custom automation solutions built on Make.com. Streamline workflows, boost productivity, and scale your operations efficiently.",
   keywords: "Make.com automation, custom automation, workflow automation, business automation, no-code automation",
   authors: [{ name: "Made With Make" }],
+  alternates: {
+    canonical: "./",
+  },
   openGraph: {
     title: "Made With Make - Custom Automation Solutions",
     description: "Transform your business with custom automation solutions built on Make.com. Streamline workflows, boost productivity, and scale your operations efficiently.",
+    images: "/hero.png",
     type: "website",
     locale: "en_US",
   },
@@ -20,6 +28,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Made With Make - Custom Automation Solutions",
     description: "Transform your business with custom automation solutions built on Make.com. Streamline workflows, boost productivity, and scale your operations efficiently.",
+    images: "/hero.png",
+    creator: "@madewithmake",
   },
   robots: {
     index: true,

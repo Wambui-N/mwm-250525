@@ -10,7 +10,6 @@ const testimonials = [
       "I enjoyed working with Wambui on automating our proposal process. She is honest, professional, and ensures that she follows through on what she promises. I would definitely recommend working with her.",
     author: "Joyce Kayima",
     role: "Founder's Freedom",
-    avatar: "/testimonials/samantha.jpg",
   },
 ];
 

@@ -16,7 +16,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <Image
           src="/hero.png"
-          alt=""
+          alt="An abstract background image with a mesh gradient."
           fill
           priority
           className="rounded-xl object-cover"
@@ -93,9 +93,9 @@ const Hero = () => {
                     <Clock className="h-5 w-5 text-maroon sm:h-6 sm:w-6" />
                   </div>
                   <div>
-                    <h3 className="mb-1 text-base font-semibold text-white sm:mb-2 sm:text-lg">
+                    <h2 className="mb-1 text-base font-semibold text-white sm:mb-2 sm:text-lg">
                       Seamless Integration
-                    </h3>
+                    </h2>
                     <p className="text-sm text-white/80 sm:text-base">
                       We build invisible AI-powered business automations that
                       plugs into your existing tools. No learning curves, no new
@@ -114,9 +114,9 @@ const Hero = () => {
                     <BarChart className="h-5 w-5 text-maroon sm:h-6 sm:w-6" />
                   </div>
                   <div>
-                    <h3 className="mb-1 text-base font-semibold text-white sm:mb-2 sm:text-lg">
+                    <h2 className="mb-1 text-base font-semibold text-white sm:mb-2 sm:text-lg">
                       Smart Workflows
-                    </h3>
+                    </h2>
                     <p className="text-sm text-white/80 sm:text-base">
                       Custom workflow automation solutions that turn your
                       busywork into background processes.

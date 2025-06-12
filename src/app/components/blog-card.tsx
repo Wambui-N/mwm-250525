@@ -21,7 +21,7 @@ export function BlogCard({ post, className = "" }: BlogCardProps) {
         <div className="relative aspect-video overflow-hidden">
           <Image
             src={`https:${imageUrl}`}
-            alt={typeof post.fields.title === 'string' ? post.fields.title : 'Blog post image'}
+            alt={typeof post.fields.title === 'string' ? `Cover image for ${post.fields.title}` : 'Blog post image'}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
@@ -41,9 +41,9 @@ export function BlogCard({ post, className = "" }: BlogCardProps) {
             ))}
           </div>
         )}
-        <h3 className="mb-3 text-xl font-semibold group-hover:text-black/80">
+        <h2 className="mb-3 text-xl font-semibold group-hover:text-black/80">
           {typeof post.fields.title === 'string' ? post.fields.title : 'Untitled Post'}
-        </h3>
+        </h2>
         <div className="mt-auto flex items-center text-sm font-medium text-black/70 group-hover:text-black">
           Read More
           <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

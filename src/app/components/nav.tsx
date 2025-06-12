@@ -81,7 +81,7 @@ const Nav = () => {
   const navigation = {
     main: [
       { name: "Home", href: "/" },
-      { name: "Services", href: "/services" },
+      // { name: "Services", href: "/services" },
       { name: "Blog", href: "/blog" },
     ],
   };
